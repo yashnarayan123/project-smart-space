@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semester Navigation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&family=Big+Shoulders+Stencil:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: "Kanit", sans-serif;
+        background: linear-gradient(
+          120deg,
+          #98e4d6 0%,
+          #c4e0ff 50%,
+          #ffd1d1 100%
+        );
+        overflow: hidden;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+
+      .nav-button {
+        width: 160px;
+        height: 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        cursor: pointer;
+        text-decoration: none;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .nav-button:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .nav-button:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+      .nav-button:nth-child(3) {
+        animation-delay: 1s;
+      }
+      .nav-button:nth-child(4) {
+        animation-delay: 1.5s;
+      }
+
+      .nav-button::after {
+        content: attr(data-sem);
+        position: absolute;
+        font-family: "Big Shoulders Stencil", sans-serif;
+        font-size: 80px;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.05);
+        z-index: 0;
+        transition: all 0.4s ease;
+      }
+
+      .nav-button:hover::after {
+        color: rgba(0, 0, 0, 0.1);
+        transform: scale(1.1);
+      }
+
+      .nav-button span {
+        font-weight: 600;
+        font-size: 18px;
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease;
+      }
+
+      .nav-button:nth-child(1),
+      .nav-button:nth-child(5),
+      .nav-button:nth-child(3),
+      .nav-button:nth-child(7) {
+        border-top: 4px solid red;
+      }
+      .nav-button:nth-child(1)::before,
+      .nav-button:nth-child(5)::before,
+      .nav-button:nth-child(3)::before,
+      .nav-button:nth-child(7)::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        background-color: red;
+        clip-path: circle(0% at 50% calc(50%));
+        transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+      }
+      .nav-button:nth-child(1):hover::before,
+      .nav-button:nth-child(5):hover::before,
+      .nav-button:nth-child(3):hover::before,
+      .nav-button:nth-child(7):hover::before {
+        clip-path: circle(100% at 50% 50%);
+      }
+      .nav-button:nth-child(1):hover span,
+      .nav-button:nth-child(5):hover span,
+      .nav-button:nth-child(3):hover span,
+      .nav-button:nth-child(7):hover span {
+        color: white;
+      }
+
+      .nav-button:nth-child(2),
+      .nav-button:nth-child(6),
+      .nav-button:nth-child(4),
+      .nav-button:nth-child(8) {
+        border-top: 4px solid #250e3c;
+      }
+      .nav-button:nth-child(2)::before,
+      .nav-button:nth-child(6)::before,
+      .nav-button:nth-child(4)::before,
+      .nav-button:nth-child(8)::before {
+        content: "";
+        position: absolute;
+        z-index: -2;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        background-color: #250e3c;
+        clip-path: polygon(
+          0% -20%,
+          100% -30%,
+          100% -10%,
+          0% 0%,
+          0% 130%,
+          100% 120%,
+          100% 100%,
+          0% 110%
+        );
+        transition: clip-path 1s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .nav-button:nth-child(2):hover::before,
+      .nav-button:nth-child(6):hover::before,
+      .nav-button:nth-child(4):hover::before,
+      .nav-button:nth-child(8):hover::before {
+        clip-path: polygon(
+          0% 10%,
+          100% 0%,
+          100% 20%,
+          0% 30%,
+          0% 100%,
+          100% 90%,
+          100% 70%,
+          0% 80%
+        );
+      }
+      .nav-button:nth-child(2):hover span,
+      .nav-button:nth-child(6):hover span,
+      .nav-button:nth-child(4):hover span,
+      .nav-button:nth-child(8):hover span {
+        color: rgb(250, 25, 5);
+      }
+
+      / @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        100% {
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+      }
+
+      .nav-button:hover {
+        animation: glow 2s infinite;
+      }
+    </style>
+  
+  </head>
+  <body>
+
+
+
+
+    <div class="button-container">
+      <a href="resource.html" class="nav-button" data-sem="1">
+        <span>1st Semester</span>
+      </a>
+
+      <a href="page2.html" class="nav-button" data-sem="2">
+        <span>2nd Semester</span>
+      </a>
+
+      <a href="page3.html" class="nav-button" data-sem="3">
+        <span>3rd Semester</span>
+      </a>
+
+      <a href="page4.html" class="nav-button" data-sem="4">
+        <span>4th Semester</span>
+      </a>
+    </div>
+
+    <div class="button-container">
+      <a href="page5.html" class="nav-button" data-sem="5">
+        <span>5th Semester</span>
+      </a>
+
+      <a href="page6.html" class="nav-button" data-sem="6">
+        <span>6th Semester</span>
+      </a>
+
+      <a href="page7.html" class="nav-button" data-sem="7">
+        <span>7th Semester</span>
+      </a>
+
+      <a href="page8.html" class="nav-button" data-sem="8">
+        <span>8th Semester</span>
+      </a>
+    </div>
+  </body>
+</html>

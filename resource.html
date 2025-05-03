@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartSpace - Semester 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(120deg, #98e4d6 0%, #c4e0ff 50%, #ffd1d1 100%);
+            background-attachment: fixed;
+            font-family: 'Kanit', sans-serif;
+            color: #333;
+        }
+        
+       
+        
+        @keyframes logoGlow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 168, 204, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 168, 204, 0.8),
+                             0 0 30px rgba(0, 168, 204, 0.3);
+            }
+        }
+        
+        main {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 5%;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            font-family: 'Orbitron', sans-serif;
+            color: #4a47a3;
+            text-shadow: 0 0 10px rgba(74, 71, 163, 0.2);
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #00a8cc, #ff6b6b);
+            border-radius: 3px;
+            animation: linePulse 2s infinite;
+        }
+        
+        @keyframes linePulse {
+            0%, 100% { width: 100px; opacity: 0.8; }
+            50% { width: 150px; opacity: 1; }
+        }
+        
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .link-box {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15),
+                        0 0 20px rgba(0, 168, 204, 0.2);
+        }
+        
+        .link-box h2 {
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .link-box:hover h2 {
+            color: #4a47a3;
+            text-shadow: 0 0 10px rgba(74, 71, 163, 0.3);
+        }
+        
+        
+        .link-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                           #00a8cc, #ff6b6b, #892cdc, #00a8cc);
+            background-size: 400% 400%;
+            border-radius: 16px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: borderGlow 4s linear infinite;
+        }
+        
+        .link-box:hover::before {
+            opacity: 0.8;
+        }
+        
+        @keyframes borderGlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 400% 50%;
+            }
+        }
+        
+      
+        .content-section {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content-section h2 {
+            color: #4a47a3;
+            margin-bottom: 25px;
+            font-family: 'Orbitron', sans-serif;
+            border-bottom: 2px solid rgba(74, 71, 163, 0.2);
+            padding-bottom: 10px;
+            text-shadow: 0 0 8px rgba(74, 71, 163, 0.1);
+        }
+        
+        .content-section h3 {
+            color: #ff6b6b;
+            margin: 20px 0 10px 0;
+            text-shadow: 0 0 8px rgba(255, 107, 107, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .content-section p {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .content-section p:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 15px rgba(0, 168, 204, 0.2);
+            transform: translateX(5px);
+        }
+        
+     
+        #pyq-toggle:checked ~ #pyq-content,
+        #books-toggle:checked ~ #books-content {
+            display: block;
+        }
+        
+        input[type="checkbox"] {
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 60px;
+        }
+    </style>
+        <link rel = "stylesheet" href="css/realhome.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Playwrite+HU:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    
+    <!-- Navigation -->
+    <div class="nav-container">
+        <a href="#" class="logo">Smart Space</a>
+        <ul class="nav-menu">
+            <li><a href="https://attendance-predictor.netlify.app/" class="nav-link">Attendance Predictor</a></li>
+            <li><a href="https://cgpa-calc.streamlit.app/" class="nav-link">CGPA Calculator</a></li>
+            <li><a href="03selectbranch.html" class="nav-link">Study Resources</a></li>
+            <li><a href="04routine.html" class="nav-link">Campus Compass</a></li>
+        </ul>
+    </div>
+    
+    <main>
+        <h1>SEMESTER 1</h1>
+        
+        <div class="links-container">
+            <label for="pyq-toggle" class="link-box">
+                <h2>PREVIOUS YEAR QUESTIONS</h2>
+            </label>
+            <input type="checkbox" id="pyq-toggle">
+            <div id="pyq-content" class="content-section">
+                <h2>Question Papers</h2>
+                <h3>Midterm</h3>
+                <p>Calculus Question Paper – 2024</p>
+                <h3>Endterm</h3>
+                <p>Calculus Question Paper – 2024</p>
+            </div>
+            
+            <label for="books-toggle" class="link-box">
+                <h2>PRESCRIBED TEXTBOOKS</h2>
+            </label>
+            <input type="checkbox" id="books-toggle">
+            <div id="books-content" class="content-section">
+                <h2>Prescribed Textbooks</h2>
+                <p>CALCULUS - THOMAS Calculus</p>
+            </div>
+        </div>
+    </main>
+    
+
+</body>
+</html>

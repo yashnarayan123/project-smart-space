@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Space - Cyberpunk Platform Links</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Rajdhani', Arial, sans-serif;
+            background: linear-gradient(120deg, #98e4d6 0%, #c4e0ff 50%, #ffd1d1 100%);
+            overflow: hidden;
+        }
+        
+
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-wrap: wrap;
+            gap: 150px;
+
+        }
+        
+        .platform-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 200px;
+            position: relative;
+        }
+        
+        .image-container {
+            width: 250px;
+            height: 300px;
+            background-color:#250e3c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 10px;
+            position: relative;
+            border: 1px solid;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            padding: 20px;
+            box-sizing: border-box;
+            backdrop-filter: blur(5px);
+            overflow: hidden;
+        }
+        
+        
+        .cse-btn {
+            border-color: #16213e;
+            box-shadow: 0 0 20px rgba(22, 33, 62, 0.7);
+            animation: cse-pulse 3s infinite alternate;
+        }
+        
+        
+        .aie-btn {
+            border-color: #3d0c4a;
+            box-shadow: 0 0 20px rgba(61, 12, 74, 0.7);
+            animation: aie-pulse 3s infinite alternate;
+        }
+        
+       
+        .cce-btn {
+            border-color: #0f4c5c;
+            box-shadow: 0 0 20px rgba(15, 76, 92, 0.7);
+            animation: cce-pulse 3s infinite alternate;
+        }
+        
+        .platform-icon {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.9) contrast(1.1) drop-shadow(0 0 5px rgba(0,0,0,0.5));
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .platform-name {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 0;
+            transition: all 0.3s;
+            width: 100%;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+        
+        
+        
+        
+        
+        .platform-card:hover .image-container {
+            transform: scale(1.1) translateY(-10px);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        
+        .platform-card:hover .platform-icon {
+            transform: scale(1.05);
+            filter: brightness(1) contrast(1.2) drop-shadow(0 0 8px rgba(0,0,0,0.7));
+        }
+        
+        .platform-card:hover .platform-name {
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        
+        @keyframes cse-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(22, 33, 62, 0.7); }
+            50% { box-shadow: 0 0 30px rgba(22, 33, 62, 0.9); }
+        }
+        
+        @keyframes aie-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(61, 12, 74, 0.7); }
+            50% { box-shadow: 0 0 30px rgba(61, 12, 74, 0.9); }
+        }
+        
+        @keyframes cce-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(15, 76, 92, 0.7); }
+            50% { box-shadow: 0 0 30px rgba(15, 76, 92, 0.9); }
+        }
+        
+        
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom,
+                    transparent 0%,
+                    rgba(0, 0, 0, 0.05) 50%,
+                    transparent 100%);
+            background-size: 100% 4px;
+            animation: scanline 8s linear infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes scanline {
+            from { background-position: 0 0; }
+            to { background-position: 0 100%; }
+        }
+        /* Navigation */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    position: relative;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Big Shoulders Stencil', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4361ee;
+    text-decoration: none;
+    letter-spacing: 1px;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #4361ee, #4cc9f0);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+}
+
+.logo:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-link {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #212529;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #4361ee;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #4361ee;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+    </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Playwrite+HU:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href="css/realhome.css">   
+</head>
+<body>
+        <!-- Background Elements -->
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        
+    <div class="nav-container">
+        <a href="#" class="logo" >Smart Space</a>
+        <ul class="nav-menu">
+            <li><a href="https://attendance-predictor.netlify.app/" class="nav-link">Attendance Predictor</a></li>
+            <li><a href="https://cgpa-calc.streamlit.app/" class="nav-link">CGPA Calculator</a></li>
+            <li><a href="03selectbranch.html" class="nav-link">Study Resources</a></li>
+            <li><a href="" class="nav-link">Campus Compass</a></li>
+        </ul>
+    </div>
+    
+    
+    <div class="container">
+        <a href="03.1sem.html" class="platform-card" target="_blank">
+            <div class="image-container cse-btn">
+                <img src="images/cselogo_upscayl_5x_upscayl-standard-4x.png" alt="Computer Science" class="platform-icon">
+               
+            </div>
+        </a>
+        
+        <a href="03.1sem.html" class="platform-card" target="_blank">
+            <div class="image-container aie-btn">
+                <img src="images/aielogo_upscayl_5x_upscayl-standard-4x.png" alt="AI Engineering" class="platform-icon">
+               
+            </div>
+        </a>
+        
+        <a href="03.1sem.html" class="platform-card" target="_blank">
+            <div class="image-container cce-btn">
+                <img src="images/ccelogo_upscayl_5x_upscayl-standard-4x.png" alt="Computer and Communication Engineering" class="platform-icon">
+                
+            </div>
+        </a>
+    </div>
+</body>
+</html>04routine.html

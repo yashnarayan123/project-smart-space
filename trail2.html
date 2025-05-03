@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Day Pyramid</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/04routine.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:wght@700&family=Kanit:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Basic visibility logic */
+    .content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .content:target {
+      display: block;
+    }
+
+    .default-content {
+      display: block;
+    }
+
+    ul.menu {
+      list-style: none;
+      padding: 0;
+      font-size: 1.2rem;
+    }
+
+    ul.menu li {
+      margin: 0.5rem 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+
+  <!-- Navigation -->
+  <div class="nav-container">
+    <a href="realhome.html" class="logo">Smart Space</a>
+    <ul class="nav-menu">
+      <li><a href="https://attendance-predictor.netlify.app/" class="nav-link">Attendance Predictor</a></li>
+      <li><a href="https://cgpa-calc.streamlit.app/" class="nav-link">CGPA Calculator</a></li>
+      <li><a href="03selectbranch.html" class="nav-link">Study Resources</a></li>
+      <li><a href="04routine.html" class="nav-link">Campus Compass</a></li>
+    </ul>
+  </div>
+
+  <div class="wholebody">
+    <!-- Day Pyramid -->
+    <div class="pyramid">
+      <div class="row">
+        <a href="#monday" class="day"><span></span><span></span><span></span><span></span>Monday</a>
+      </div>
+      <div class="row">
+        <a href="#tuesday" class="day"><span></span><span></span><span></span><span></span>Tuesday</a>
+        <a href="#wednesday" class="day"><span></span><span></span><span></span><span></span>Wednesday</a>
+      </div>
+      <div class="row">
+        <a href="#thursday" class="day"><span></span><span></span><span></span><span></span>Thursday</a>
+        <a href="#friday" class="day"><span></span><span></span><span></span><span></span>Friday</a>
+        <a href="#saturday" class="day"><span></span><span></span><span></span><span></span>Saturday</a>
+        <a href="#sunday" class="day"><span></span><span></span><span></span><span></span>Sunday</a>
+      </div>
+    </div>
+
+    <!-- Day Menus -->
+    <div class="content" id="monday">
+      <h2>Monday</h2>
+      <ul class="menu">
+        <li><strong>Breakfast:</strong> Idli with Sambar & Chutney</li>
+        <li><strong>Lunch:</strong> Rice, Dal Fry & Mixed Veg Curry</li>
+        <li><strong>Dinner:</strong> Chapati with Paneer Butter Masala</li>
+      </ul>
+    </div>
+
+    <div class="content" id="tuesday">
+      <h2>Tuesday</h2>
+      <ul class="menu">
+        <li><strong>Breakfast:</strong> Upma with Coconut Chutney</li>
+        <li><strong>Lunch:</strong> Lemon Rice & Potato Fry</li>
+        <li><strong>Dinner:</strong> Vegetable Pulao with Raita</li>
+      </ul>
+    </div>
+
+    <div class="content" id="wednesday">
+      <h2>Wednesday</h2>
+      <ul class="menu">
+        <li><strong>Breakfast:</strong> Bonda & Pongal</li>
+        <li><strong>Lunch:</strong> Rice with Brinjal Fry</li>
+        <li><strong>Dinner:</strong> Rava Dosa with Tomato Chutney</li>
+      </ul>
+    </div>
+
+    <div class="content" id="thursday">
+      <h2>Thursday</h2>
+      <ul class="menu">
+        <li><strong>Breakfast:</strong> Masala Dosa with Sambar</li>
+        <li><strong>Lunch:</strong> Curd Rice with Pickle</li>
+        <li><strong>Dinner:</strong> Chole Bhature</li>
+      </ul>
+    </div>
+
+    <div class="content" id="friday">
+      <h2>Friday</h2>
+      <ul class="menu">
+        <li><strong>Breakfast:</strong> Poha with Peanuts</li>
+        <li><strong>Lunch:</strong> Rajma Chawal</li>
+        <li><strong>Dinner:</strong> Vegetable Biryani with Raita</li>
+      </ul>
+    </div>
+
+    <div class="content" id="saturday">
+      <h2>Saturday</h2>
+      <ul class="menu">
+        <li><strong>Breakfast:</strong> Puri with Aloo Sabzi</li>
+        <li><strong>Lunch:</strong> Dal Makhani & Jeera Rice</li>
+        <li><strong>Dinner:</strong> Lemon Garlic Noodles</li>
+      </ul>
+    </div>
+
+    <div class="content" id="sunday">
+      <h2>Sunday</h2>
+      <ul class="menu">
+        <li><strong>Breakfast:</strong> Aloo Paratha with Curd</li>
+        <li><strong>Lunch:</strong> Butter Chicken with Naan</li>
+        <li><strong>Dinner:</strong> Gobi Manchurian with Fried Rice</li>
+      </ul>
+    </div>
+
+    <div class="content default-content">
+      <h2>Select a Day</h2>
+      <p>Click on any day of the week to reveal the food menu for that day.</p>
+    </div>
+  </div>
+
+  <!-- Script to default to Monday on load -->
+  <script>
+    if (!location.hash) {
+      location.hash = "#monday";
+    }
+  </script>
+</body>
+</html>
