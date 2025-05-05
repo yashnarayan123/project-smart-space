@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Predictor</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --background-color: #f5f7fa;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        select:focus, input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.2);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .results {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .result-card {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .result-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: var(--error-color);
+            margin-top: 5px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .subject-list {
+            margin-top: 15px;
+        }
+
+        .subject-list ul {
+            list-style-type: none;
+            columns: 2;
+        }
+
+        .subject-list li {
+            padding: 5px 0;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            .subject-list ul {
+                columns: 1;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+        }
+
+        .percentage-display {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .good {
+            color: var(--success-color);
+        }
+
+        .warning {
+            color: #f39c12;
+        }
+
+        .danger {
+            color: var(--error-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Attendance Predictor</h1>
+            <p class="description">Calculate your expected attendance percentage and see how many more classes you need to attend to maintain 75% attendance.</p>
+        </header>
+
+        <div class="card">
+            <div class="form-group">
+                <label for="subject">Select Subject</label>
+                <select id="subject" required>
+                    <option value="" disabled selected>Select a subject</option>
+                    <option value="object oriented programming">Object Oriented Programming</option>
+                    <option value="modern physics">Modern Physics</option>
+                    <option value="linear algebra">Linear Algebra</option>
+                    <option value="discreate mathematics">Discrete Mathematics</option>
+                    <option value="User Interface Design">User Interface Design</option>
+                    <option value="manufacturing Practice">Manufacturing Practice</option>
+                    <option value="Glimpses of glorious India">Glimpses of Glorious India</option>
+                </select>
+                <div id="subjectError" class="error">Please select a subject</div>
+            </div>
+
+            <div class="subject-list">
+                <p>Total classes for each subject:</p>
+                <ul>
+                    <li>Object Oriented Programming: 82</li>
+                    <li>Modern Physics: 50</li>
+                    <li>Linear Algebra: 86</li>
+                    <li>Discrete Mathematics: 82</li>
+                    <li>User Interface Design: 66</li>
+                    <li>Manufacturing Practice: 54</li>
+                    <li>Glimpses of Glorious India: 50</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <label for="classesHappened">Total classes that have happened so far</label>
+                <input type="number" id="classesHappened" min="0" placeholder="Enter number of classes held">
+                <div id="happenedError" class="error">Please enter a valid number</div>
+            </div>
+
+            <div class="form-group">
+                <label for="classesAttended">Classes you have attended so far</label>
+                <input type="number" id="classesAttended" min="0" placeholder="Enter number of classes attended">
+                <div id="attendedError" class="error">Please enter a valid number</div>
+            </div>
+
+            <div class="form-group">
+                <label for="futureAbsences">Classes you will be absent for in the future</label>
+                <input type="number" id="futureAbsences" min="0" placeholder="Enter number of future absences">
+                <div id="absencesError" class="error">Please enter a valid number</div>
+            </div>
+
+            <button id="calculateBtn">Calculate Attendance</button>
+        </div>
+
+        <div id="results" class="results">
+            <div class="result-card">
+                <h3>Projected Attendance</h3>
+                <div id="finalPercentage" class="percentage-display">0%</div>
+                <p>This is your predicted attendance percentage at the end of the course based on your inputs.</p>
+            </div>
+
+            <div class="result-card">
+                <h3>Attendance Recommendation</h3>
+                <div id="additionalClasses" class="percentage-display">0</div>
+                <p>To achieve 75% attendance, you need to attend this many additional classes beyond your current plan.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const subjectSelect = document.getElementById('subject');
+            const classesHappenedInput = document.getElementById('classesHappened');
+            const classesAttendedInput = document.getElementById('classesAttended');
+            const futureAbsencesInput = document.getElementById('futureAbsences');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const resultsDiv = document.getElementById('results');
+            const finalPercentageDiv = document.getElementById('finalPercentage');
+            const additionalClassesDiv = document.getElementById('additionalClasses');
+            
+            // Error elements
+            const subjectError = document.getElementById('subjectError');
+            const happenedError = document.getElementById('happenedError');
+            const attendedError = document.getElementById('attendedError');
+            const absencesError = document.getElementById('absencesError');
+
+            // Subject data
+            const subjectData = {
+                "object oriented programming": 82,
+                "modern physics": 50,
+                "linear algebra": 86,
+                "discreate mathematics": 82,
+                "User Interface Design": 66,
+                "manufacturing Practice": 54,
+                "Glimpses of glorious India": 50
+            };
+
+            calculateBtn.addEventListener('click', function() {
+                // Reset errors
+                subjectError.style.display = 'none';
+                happenedError.style.display = 'none';
+                attendedError.style.display = 'none';
+                absencesError.style.display = 'none';
+                
+                // Validate inputs
+                let isValid = true;
+                
+                if (!subjectSelect.value) {
+                    subjectError.style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (!classesHappenedInput.value || isNaN(classesHappenedInput.value)) {
+                    happenedError.style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (!classesAttendedInput.value || isNaN(classesAttendedInput.value)) {
+                    attendedError.style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (!futureAbsencesInput.value || isNaN(futureAbsencesInput.value)) {
+                    absencesError.style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (!isValid) return;
+                
+                // Get values
+                const subject = subjectSelect.value;
+                const currentTotalHappened = parseInt(classesHappenedInput.value);
+                const classesAttended = parseInt(classesAttendedInput.value);
+                const futureAbsences = parseInt(futureAbsencesInput.value);
+                
+                // Validate numbers
+                if (classesAttended > currentTotalHappened) {
+                    attendedError.textContent = "Attended classes can't be more than total classes";
+                    attendedError.style.display = 'block';
+                    return;
+                }
+                
+                // Perform calculations
+                const endOfCourseTotal = subjectData[subject];
+                const remainingClasses = endOfCourseTotal - currentTotalHappened;
+                
+                if (futureAbsences > remainingClasses) {
+                    absencesError.textContent = "Future absences can't be more than remaining classes";
+                    absencesError.style.display = 'block';
+                    return;
+                }
+                
+                const totalAttendedEnd = classesAttended + (remainingClasses - futureAbsences);
+                const finalAttendancePercentage = (totalAttendedEnd / endOfCourseTotal) * 100;
+                
+                const totalAbsences = (currentTotalHappened - classesAttended) + futureAbsences;
+                const requiredAttended75 = 3 * totalAbsences;
+                const additionalClassesNeeded = Math.max(0, requiredAttended75 - classesAttended);
+                
+                // Display results
+                finalPercentageDiv.textContent = finalAttendancePercentage.toFixed(2) + '%';
+                
+                // Color code based on percentage
+                if (finalAttendancePercentage >= 75) {
+                    finalPercentageDiv.className = 'percentage-display good';
+                } else if (finalAttendancePercentage >= 60) {
+                    finalPercentageDiv.className = 'percentage-display warning';
+                } else {
+                    finalPercentageDiv.className = 'percentage-display danger';
+                }
+                
+                additionalClassesDiv.textContent = additionalClassesNeeded.toFixed(0);
+                
+                // Color code based on additional classes needed
+                if (additionalClassesNeeded === 0) {
+                    additionalClassesDiv.className = 'percentage-display good';
+                } else if (additionalClassesNeeded <= 5) {
+                    additionalClassesDiv.className = 'percentage-display warning';
+                } else {
+                    additionalClassesDiv.className = 'percentage-display danger';
+                }
+                
+                resultsDiv.style.display = 'block';
+                
+                // Scroll to results
+                resultsDiv.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
