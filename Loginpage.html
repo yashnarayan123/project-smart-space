@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Space - Login</title>
+    <style>
+            :root {
+        --primary: #4361ee;
+        --secondary: #3f37c9;
+        --accent: #4cc9f0;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --gradient-start: #98e4d6;
+        --gradient-mid: #c4e0ff;
+        --gradient-end: #ffd1d1;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      html, body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+        background-attachment: fixed;
+        background-size: cover;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 5%;
+        position: relative;
+        z-index: 100;
+      }
+
+      .logo {
+        font-family: 'Arial', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-decoration: none;
+        letter-spacing: 1px;
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      .logo::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s ease;
+      }
+
+      .logo:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 400px;
+        padding: 20px;
+      }
+
+      .login-box {
+        display: flex;
+        width: 900px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+      }
+
+      .welcome-side {
+        flex: 1;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        position: relative;
+      }
+
+      .welcome-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .welcome-content h1 {
+        font-size: 32px;
+        margin-bottom: 15px;
+      }
+
+      .welcome-content p {
+        font-size: 16px;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+
+      .login-side {
+        flex: 1;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-title {
+        font-size: 28px;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #555;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      .input-group input:focus {
+        border-color: var(--primary);
+        outline: none;
+      }
+
+      .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .remember-me {
+        display: flex;
+        align-items: center;
+      }
+
+      .remember-me input {
+        margin-right: 8px;
+      }
+
+      .forgot-password {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .login-button {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(90deg, #ff3b3b 0%, #ff914d 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .login-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 59, 59, 0.3);
+      }
+
+      .signup-link {
+        text-align: center;
+        margin-top: 20px;
+        color: #666;
+      }
+
+      .signup-link a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .login-box {
+          flex-direction: column;
+          width: 100%;
+          max-width: 450px;
+        }
+        
+        .welcome-side {
+          padding: 30px;
+        }
+        
+        .login-side {
+          padding: 30px;
+        }
+      }
+    </style>
+    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel = "stylesheet" href="css/universal.css">
+  </head>
+  <body>
+    <div class="header">
+                 <div class="nav-container">
+               <a href="realhome.html" class="logo" >Smart Space</a>
+</div>
+
+    <div class="main-container">
+      <div class="login-box">
+        <div class="welcome-side">
+          
+          <div class="welcome-content">
+            <h1>Welcome Back!</h1>
+            <p>
+              Sign in to access your Smart Space dashboard and manage your
+              academics efficiently.
+            </p>
+          </div>
+        </div>
+
+        <div class="login-side">
+          <h2 class="login-title">Sign In</h2>
+
+          <div class="input-group">
+            <label for="username">Username or Email</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter your username or email"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <div class="remember-forgot">
+            <div class="remember-me">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
+            </div>
+            <a href="forgotpswd.html" class="forgot-password">Forgot password?</a>
+          </div>
+
+          <button class="login-button" onclick="login()">Login</button>
+
+          <div class="signup-link">
+            Don't have an account?
+            <a href="signup.html" onclick="signup()">Sign up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (username && password) {
+          window.location.href = "realhome.html";
+        } else {
+          alert("Please enter both username and password");
+        }
+      }
+
+      function signup() {
+        window.location.href = "signup.html";
+      }
+    </script>
+  </body>
+</html>

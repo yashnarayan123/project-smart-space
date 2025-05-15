@@ -3,222 +3,698 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Day Pyramid</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Campus Compass | Smart Space</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel = "stylesheet" href="css/04routine.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Playwrite+HU:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-<link rel = "stylesheet" href="css/realhome.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient-start: #98e4d6;
+            --gradient-mid: #c4e0ff;
+            --gradient-end: #ffd1d1;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Big Shoulders Stencil', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark);
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Background Elements */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(76, 201, 240, 0.1);
+            z-index: 0;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 100px;
+            right: -50px;
+        }
+
+        .wholebody {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Pyramid */
+        .pyramid {
+            perspective: 1000px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .day {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-family: 'Kanit', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .day span {
+            position: absolute;
+            display: block;
+        }
+
+        .day span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary));
+            animation: animate1 1s linear infinite;
+            animation-delay: 0s;
+        }
+
+        @keyframes animate1 {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        .day span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--primary));
+            animation: animate2 1s linear infinite;
+            animation-delay: 0.25s;
+        }
+
+        @keyframes animate2 {
+            0% { top: -100%; }
+            50%, 100% { top: 100%; }
+        }
+
+        .day span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, var(--primary));
+            animation: animate3 1s linear infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes animate3 {
+            0% { right: -100%; }
+            50%, 100% { right: 100%; }
+        }
+
+        .day span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, var(--primary));
+            animation: animate4 1s linear infinite;
+            animation-delay: 0.75s;
+        }
+
+        @keyframes animate4 {
+            0% { bottom: -100%; }
+            50%, 100% { bottom: 100%; }
+        }
+
+        .day:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        /* Modal Styles */
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 99;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        #modalContent {
+            background: white;
+            margin: 10vh auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 20px;
+            color: var(--dark);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .closeBtn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            color: #aaa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .closeBtn:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        #modalTitle {
+            font-family: 'Kanit', sans-serif;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Content Sections */
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Kanit', sans-serif;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: '';
+            display: inline-block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin-left: 10px;
+            border-radius: 3px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 0.7rem;
+            padding-left: 20px;
+            position: relative;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Default Content */
+        .default-content {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            margin: 2rem auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .default-content h2 {
+            font-family: 'Kanit', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .default-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .default-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--dark);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-container {
+                padding: 1.5rem 3%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                gap: 1.5rem;
+            }
+            
+            .day {
+                padding: 0.8rem 1.2rem;
+                font-size: 1rem;
+                margin: 0.3rem;
+            }
+            
+            .row {
+                flex-wrap: wrap;
+            }
+            
+            .default-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .day {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            #modalContent {
+                padding: 1.5rem;
+            }
+            
+            #modalTitle {
+                font-size: 1.5rem;
+            }
+            
+            .default-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-               <!-- Background Elements -->
-               <div class="circle circle-1"></div>
-               <div class="circle circle-2"></div>
-               
-           <div class="nav-container">
-               <a href="realhome.html" class="logo" >Smart Space</a>
-               <ul class="nav-menu">
-                   <li><a href="https://attendance-predictor.netlify.app/" class="nav-link">Attendance Predictor</a></li>
-                   <li><a href="https://cgpa-calc.streamlit.app/" class="nav-link">CGPA Calculator</a></li>
-                   <li><a href="03selectbranch.html" class="nav-link">Study Resources</a></li>
-                   <li><a href="04routine.html" class="nav-link">Campus Compass</a></li>
-               </ul>
-           </div>
-           
+    <!-- Background Elements -->
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
     
-    <div class = "wholebody">
-    <div class="pyramid">
-        
-        <div class="row">
-            <a href="#monday" class="day">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Monday
-            </a>
+    <div class="nav-container">
+        <a href="realhome.html" class="logo">Smart Space</a>
+        <ul class="nav-menu">
+            <li><a href="https://attendance-predictor.netlify.app/" class="nav-link">Attendance Predictor</a></li>
+            <li><a href="https://cgpa-calc.streamlit.app/" class="nav-link">CGPA Calculator</a></li>
+            <li><a href="03selectbranch.html" class="nav-link">Study Resources</a></li>
+            <li><a href="04routine.html" class="nav-link">Campus Compass</a></li>
+        </ul>
+    </div>
+    
+    <div class="wholebody">
+        <div class="pyramid">
+            <div class="row">
+                <a href="#" class="day" onclick="showCampusCompass('Monday'); return false;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Monday
+                </a>
+            </div>
+            
+            <div class="row">
+                <a href="#" class="day" onclick="showCampusCompass('Tuesday'); return false;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Tuesday
+                </a>
+                <a href="#" class="day" onclick="showCampusCompass('Wednesday'); return false;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Wednesday
+                </a>
+            </div>
+            
+            <div class="row">
+                <a href="#" class="day" onclick="showCampusCompass('Thursday'); return false;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Thursday
+                </a>
+                <a href="#" class="day" onclick="showCampusCompass('Friday'); return false;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Friday
+                </a>
+                <a href="#" class="day" onclick="showCampusCompass('Saturday'); return false;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Saturday
+                </a>
+                <a href="#" class="day" onclick="showCampusCompass('Sunday'); return false;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Sunday
+                </a>
+            </div>
         </div>
         
-        
-        <div class="row">
-            <a href="#tuesday" class="day">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Tuesday
-            </a>
-            <a href="#wednesday" class="day">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Wednesday
-            </a>
-        </div>
-        
-        
-        <div class="row">
-            <a href="#thursday" class="day">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Thursday
-            </a>
-            <a href="#friday" class="day">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Friday
-            </a>
-            <a href="#saturday" class="day">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Saturday
-            </a>
-            <a href="#sunday" class="day">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                Sunday
-            </a>
+        <div class="default-content">
+            <h2>Campus Compass</h2>
+            <p>Click on any day of the week to view your class schedule and the mess menu for CSE-C.</p>
         </div>
     </div>
     
-    
-    <div class="content" id="monday">
-        <h2>Monday Menu</h2>
-        <table class="food-schedule">
-            <thead>
-                <tr>
-                    <th style = "padding-left: 100px;">Meal</th>
-                    <th style = "padding-left: 225px;">Menu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Breakfast</td>
-                    <td>Idli with Sambar and Chutney</td>
-                </tr>
-                <tr>
-                    <td>Lunch</td>
-                    <td>Rice, Dal, Potato Fry, Curd</td>
-                </tr>
-                <tr>
-                    <td>Snacks</td>
-                    <td>Tea/Coffee with Biscuits</td>
-                </tr>
-                <tr>
-                    <td>Dinner</td>
-                    <td>Chapati, Paneer Butter Masala, Salad</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-           <!-- Tuesday Content -->
-           <div class="content" id="tuesday">
-            <h2>Tuesday Menu</h2>
-            <table class="food-schedule">
-                <thead>
-                    <tr>
-                        <th style = "padding-left: 100px;">Meal</th>
-                        <th style = "padding-left: 225px;">Menu</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Breakfast</td>
-                        <td>Poha with Tea</td>
-                    </tr>
-                    <tr>
-                        <td>Lunch</td>
-                        <td>Jeera Rice, Rajma, Salad</td>
-                    </tr>
-                    <tr>
-                        <td>Snacks</td>
-                        <td>Samosa with Chutney</td>
-                    </tr>
-                    <tr>
-                        <td>Dinner</td>
-                        <td>Vegetable Biryani, Raita</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div id="modal">
+        <div id="modalContent">
+            <span class="closeBtn" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle"></h3>
+            
+            <div class="modal-section">
+                <h4 class="section-title">Class Routine</h4>
+                <ul id="routineList"></ul>
+            </div>
+            
+            <div class="modal-section">
+                <h4 class="section-title">Mess Menu</h4>
+                <ul id="menuList"></ul>
+            </div>
         </div>
-    
-     <!-- Wednesday Content -->
-     <div class="content" id="wednesday">
-        <h2>Wednesday Menu</h2>
-        <table class="food-schedule">
-            <thead>
-                <tr>
-                    <th style = "padding-left: 100px;">Meal</th>
-                    <th style = "padding-left: 225px;">Menu</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Breakfast</td>
-                    <td>Bonda and Pongal</td>
-                </tr>
-                <tr>
-                    <td>Lunch</td>
-                    <td>Brinjal Fry, Rice, Sambar, Curd</td>
-                </tr>
-                <tr>
-                    <td>Snacks</td>
-                    <td>Vada with Coconut Chutney</td>
-                </tr>
-                <tr>
-                    <td>Dinner</td>
-                    <td>Dosa with Sambar and Chutney</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
-    
-    <div class="content" id="thursday">
-        <h2>Thursday</h2>
-        <p>Named after Thor, the Norse god of thunder. In Latin languages, it's named after Jupiter (Giovedi in Italian, Jeudi in French). Thor's day was traditionally a day of feasting.</p>
-    </div>
-    
-    <div class="content" id="friday">
-        <h2>Friday</h2>
-        <p>Named after Frigg or Freya, Norse goddesses. In Latin languages, it's named after Venus (Venerdi in Italian, Vendredi in French). The term "TGIF" celebrates the coming weekend.</p>
-    </div>
-    
-    <div class="content" id="saturday">
-        <h2>Saturday</h2>
-        <p>The only day named after a Roman god (Saturn). In Japanese, it's "doyōbi" meaning "day of the earth". Traditionally the Jewish Sabbath and a day of rest in many cultures.</p>
-    </div>
-    
-    <div class="content" id="sunday">
-        <h2>Sunday</h2>
-        <p>Named after the Sun. Considered the first day of the week in many cultures and the last in others. Traditionally a day of rest and worship in Christian cultures.</p>
-    </div>
-    
-    <div class="content default-content">
-        <h2>Campus Food Routine</h2>
-        <p>Click on any day of the week to view the daily food menu served in the campus mess.</p>
-    </div>
-</div>
-</div>
+
+    <script>
+        const routine = {
+            Monday: [
+                "9:00 - 9:45 AM: OOPS",
+                "9:45 - 10:35 AM: Modern Physics",
+                "10:45 - 11:35 AM: Linear Algebra",
+                "11:35 - 12:25 PM: Linear Algebra",
+                "12:25 - 1:15 PM: Library",
+                "2:10 - 3:00 PM: Discrete Maths",
+                "3:50 - 4:50 PM: Library"
+            ],
+            Tuesday: [
+                "9:00 - 9:45 AM: UID",
+                "9:45 - 10:35 AM: Library",
+                "10:45 - 11:35 AM: Manufacturing Lab",
+                "11:35 - 12:25 PM: Manufacturing Lab",
+                "12:25 - 1:15 PM: Manufacturing Lab",
+                "2:10 - 3:00 PM: Linear Algebra",
+                "3:50 - 4:00 PM: GOGI",
+                "4:00 - 4:50 PM: Library"
+            ],
+            Wednesday: [
+                "9:00 - 9:45 AM: Linear Algebra",
+                "9:45 - 10:35 AM: Modern Physics",
+                "10:45 - 11:35 AM: Discrete Maths",
+                "11:35 - 12:25 PM: Discrete Maths",
+                "12:25 - 1:15 PM: UID",
+                "2:10 - 3:00 PM: OOPS",
+                "3:50 - 4:00 PM: Class Advisor",
+                "4:00 - 4:50 PM: Library"
+            ],
+            Thursday: [
+                "9:00 - 9:45 AM: Linear Algebra",
+                "9:45 - 10:35 AM: Modern Physics",
+                "10:45 - 11:35 AM: UID",
+                "11:35 - 12:25 PM: UID",
+                "12:25 - 1:15 PM: OOPS",
+                "2:10 - 3:00 PM: Library",
+                "3:50 - 4:00 PM: Library",
+                "4:00 - 4:50 PM: Library"
+            ],
+            Friday: [
+                "9:00 - 9:45 AM: Discrete Maths",
+                "9:45 - 10:35 AM: Library",
+                "10:45 - 11:35 AM: OOPS",
+                "11:35 - 12:25 PM: OOPS",
+                "12:25 - 1:15 PM: Linear Algebra",
+                "2:10 - 3:00 PM: Modern Physics",
+                "3:50 - 4:00 PM: GOGI",
+                "4:00 - 4:50 PM: Library"
+            ],
+            Saturday: ["No classes scheduled."],
+            Sunday: ["No classes scheduled."]
+        };
+
+        const mess = {
+            Monday: { 
+                breakfast: "Idli with Sambar and Chutney", 
+                lunch: "Rice, Dal, Potato Fry, Curd", 
+                snacks: "Tea/Coffee with Biscuits",
+                dinner: "Chapati, Paneer Butter Masala, Salad" 
+            },
+            Tuesday: { 
+                breakfast: "Poha with Tea", 
+                lunch: "Jeera Rice, Rajma, Salad", 
+                snacks: "Samosa with Chutney",
+                dinner: "Vegetable Biryani, Raita" 
+            },
+            Wednesday: { 
+                breakfast: "Bonda and Pongal", 
+                lunch: "Brinjal Fry, Rice, Sambar, Curd", 
+                snacks: "Vada with Coconut Chutney",
+                dinner: "Dosa with Sambar and Chutney" 
+            },
+            Thursday: { 
+                breakfast: "Upma & Chutney", 
+                lunch: "Aloo Gobi, Rice, Roti", 
+                snacks: "Tea with Pakora",
+                dinner: "Masala Dosa" 
+            },
+            Friday: { 
+                breakfast: "Paratha & Pickle", 
+                lunch: "Chana Masala, Rice", 
+                snacks: "Coffee with Cookies",
+                dinner: "Veg Biryani" 
+            },
+            Saturday: { 
+                breakfast: "Maggi & Tea", 
+                lunch: "Poori & Aloo", 
+                snacks: "Fruit Juice",
+                dinner: "Khichdi & Papad" 
+            },
+            Sunday: { 
+                breakfast: "Sandwich & Juice", 
+                lunch: "Special Thali", 
+                snacks: "Ice Cream",
+                dinner: "Noodles & Manchurian" 
+            }
+        };
+
+        function showCampusCompass(day) {
+            document.getElementById('modalTitle').innerText = `${day} Schedule`;
+
+            // Class Routine
+            const routineItems = routine[day] || ["No routine found."];
+            const routineList = document.getElementById('routineList');
+            routineList.innerHTML = "";
+            routineItems.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                routineList.appendChild(li);
+            });
+
+            // Mess Menu
+            const menuList = document.getElementById('menuList');
+            menuList.innerHTML = "";
+            const meals = mess[day] || {};
+            ["breakfast", "lunch", "snacks", "dinner"].forEach(meal => {
+                if (meals[meal]) {
+                    const li = document.createElement("li");
+                    li.textContent = `${meal.charAt(0).toUpperCase() + meal.slice(1)}: ${meals[meal]}`;
+                    menuList.appendChild(li);
+                }
+            });
+
+            document.getElementById('modal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>

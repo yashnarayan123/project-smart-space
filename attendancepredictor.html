@@ -3,31 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance Predictor</title>
+    <title>Smart Space - Attendance Predictor</title>
     <style>
         :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #166088;
-            --accent-color: #4fc3f7;
-            --background-color: #f5f7fa;
-            --card-color: #ffffff;
-            --text-color: #333333;
-            --error-color: #e74c3c;
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient-start: #98e4d6;
+            --gradient-mid: #c4e0ff;
+            --gradient-end: #ffd1d1;
             --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --error-color: #e74c3c;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Arial", sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
         }
 
         body {
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--dark);
             line-height: 1.6;
             padding: 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Arial', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         .container {
@@ -42,8 +90,9 @@
         }
 
         h1 {
-            color: var(--primary-color);
+            color: var(--primary);
             margin-bottom: 10px;
+            font-size: 32px;
         }
 
         .description {
@@ -52,10 +101,10 @@
         }
 
         .card {
-            background-color: var(--card-color);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 30px;
             margin-bottom: 20px;
         }
 
@@ -66,40 +115,50 @@
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--secondary-color);
+            font-weight: 500;
+            color: #555;
         }
 
         select, input {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 16px;
-            transition: border 0.3s;
+            transition: border-color 0.3s;
         }
 
         select:focus, input:focus {
-            border-color: var(--accent-color);
+            border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.2);
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
         }
 
         button {
-            background-color: var(--primary-color);
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #ff3b3b 0%, #ff914d 100%);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 6px;
             font-size: 16px;
             font-weight: 600;
-            width: 100%;
-            transition: background-color 0.3s;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         button:hover {
-            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 59, 59, 0.3);
         }
 
         .results {
@@ -108,17 +167,18 @@
         }
 
         .result-card {
-            background-color: var(--card-color);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--accent-color);
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
         }
 
         .result-card h3 {
-            color: var(--secondary-color);
-            margin-bottom: 10px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 22px;
         }
 
         .error {
@@ -130,11 +190,15 @@
 
         .subject-list {
             margin-top: 15px;
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 15px;
+            border-radius: 8px;
         }
 
         .subject-list ul {
             list-style-type: none;
             columns: 2;
+            margin-top: 10px;
         }
 
         .subject-list li {
@@ -142,7 +206,7 @@
             color: #555;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .subject-list ul {
                 columns: 1;
             }
@@ -152,15 +216,16 @@
             }
             
             .card {
-                padding: 15px;
+                padding: 20px;
             }
         }
 
         .percentage-display {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            color: var(--primary-color);
-            margin: 10px 0;
+            color: var(--primary);
+            margin: 15px 0;
+            text-align: center;
         }
 
         .good {
@@ -168,15 +233,24 @@
         }
 
         .warning {
-            color: #f39c12;
+            color: var(--warning-color);
         }
 
         .danger {
             color: var(--error-color);
         }
     </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/universal.css">
 </head>
 <body>
+    <div class="header">
+        <div class="nav-container">
+            <a href="realhome.html" class="logo">Smart Space</a>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <h1>Attendance Predictor</h1>
